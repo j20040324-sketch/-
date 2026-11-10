@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prediction-market-lens"
+version = "0.1.0"
+description = "A small, auditable research pipeline for prediction markets."
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+market-lens = "market_lens.cli:main"
+market-lens-web = "market_lens.web:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+market_lens = ["web/*"]

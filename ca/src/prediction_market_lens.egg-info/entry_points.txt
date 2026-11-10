@@ -1,0 +1,3 @@
+[console_scripts]
+market-lens = market_lens.cli:main
+

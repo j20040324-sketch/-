@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f6f4">
+  <title>Market Lens | 预测市场监测</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Market Lens 首页">
+      <span class="brand-mark">M</span><span>Market Lens</span>
+    </a>
+    <div class="topbar-meta"><span class="live-dot"></span><span>PUBLIC MARKETS</span><span class="meta-divider"></span><span id="updated-at">尚未同步</span></div>
+    <button class="button button-primary" id="refresh-button"><span class="button-icon">↻</span><span>同步市场</span></button>
+  </header>
+
+  <main class="page-shell">
+    <section class="intro-row">
+      <div>
+        <p class="eyebrow">RESEARCH WORKSPACE <span> / </span> PREDICTION MARKETS</p>
+        <h1>市场监测</h1>
+        <p class="intro-copy">观察概率变化与市场活动，追踪值得进一步研究的事件。</p>
+      </div>
+      <div class="source-list" aria-label="数据来源">
+        <span class="source-pill source-poly"><i></i> Polymarket</span>
+        <span class="source-pill source-kalshi"><i></i> Kalshi</span>
+      </div>
+    </section>
+
+    <section class="summary-grid" aria-label="市场概况">
+      <article class="summary-item"><div class="summary-label">已收录市场</div><div class="summary-value" id="stat-total">—</div><div class="summary-foot">两个公开数据源</div></article>
+      <article class="summary-item"><div class="summary-label">关注信号</div><div class="summary-value" id="stat-alerts">—</div><div class="summary-foot">触发规则的市场</div></article>
+      <article class="summary-item"><div class="summary-label">概率有变化</div><div class="summary-value" id="stat-moving">—</div><div class="summary-foot">基于历史快照比较</div></article>
+      <article class="summary-item"><div class="summary-label">最近同步</div><div class="summary-value summary-time" id="stat-time">—</div><div class="summary-foot" id="sync-health">等待首次同步</div></article>
+    </section>
+
+    <section class="market-section">
+      <div class="section-heading">
+        <div><h2>市场列表</h2><span class="result-count" id="result-count">0 个市场</span></div>
+        <label class="search-box"><span class="search-icon">⌕</span><input id="search" type="search" placeholder="搜索事件或 ID" autocomplete="off"><kbd>⌘ K</kbd></label>
+      </div>
+      <div class="filters-row">
+        <div class="segmented" role="group" aria-label="信号筛选">
+          <button class="segment active" data-signal="all">全部</button>
+          <button class="segment" data-signal="alerts">关注信号</button>
+          <button class="segment" data-signal="moving">概率变化</button>
+        </div>
+        <div class="filter-right">
+          <label class="filter-control"><span>来源</span><select id="platform"><option value="all">全部平台</option><option value="polymarket">Polymarket</option><option value="kalshi">Kalshi</option></select></label>
+          <label class="filter-control"><span>排序</span><select id="sort"><option value="volume">成交量</option><option value="probability_change">概率变化</option><option value="end_time">结束时间</option></select></label>
+        </div>
+      </div>
+      <div id="provider-errors" class="provider-errors" hidden></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>市场</th><th>来源</th><th>YES 概率</th><th>变化</th><th>24H 成交量</th><th>结束时间</th><th>信号</th><th></th></tr></thead>
+          <tbody id="market-rows"><tr><td colspan="8" class="empty-state">尚无市场数据。点击“同步市场”开始采集。</td></tr></tbody>
+        </table>
+      </div>
+      <div class="table-footer"><span>概率口径以各平台来源字段为准</span><div class="pagination"><span id="footer-count">—</span><button id="prev-page" class="page-button" aria-label="上一页" title="上一页">‹</button><span id="page-status">1 / 1</span><button id="next-page" class="page-button" aria-label="下一页" title="下一页">›</button></div></div>
+    </section>
+    <footer class="disclaimer"><span>仅供研究参考，不构成投资建议。</span><span>概率与成交量来自平台公开 API，字段口径可能不同。</span></footer>
+  </main>
+
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <aside class="detail-drawer" id="detail-drawer" aria-hidden="true" aria-label="市场详情">
+    <div class="drawer-head"><span class="eyebrow">MARKET DETAIL</span><button class="icon-button" id="close-drawer" aria-label="关闭详情" title="关闭">×</button></div>
+    <div id="drawer-content" class="drawer-content"></div>
+  </aside>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
